@@ -14,7 +14,9 @@ RUN apt-get update && apt-get install -y software-properties-common && \
         build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3.12
+RUN curl -sSf https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py && \
+    python3.12 /tmp/get-pip.py && \
+    rm -f /tmp/get-pip.py
 
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.12 1 && \
     update-alternatives --install /usr/bin/pip pip /usr/local/bin/pip3.12 1
